@@ -1,13 +1,11 @@
 { inputs
-, config
-, lib
 , cell
 ,
 }: {
   config = {
-    sops.secretsDir = lib.mkDefault ../keys;
+    sops.secretsDir = ../keys;
     sops.gnupg.sshKeyPaths = [ ];
-    sops.age.sshKeyPaths = lib.mkDefault [
+    sops.age.sshKeyPaths = [
       "/persist/etc/ssh/ssh_host_ed25519_key"
     ];
   };
