@@ -1,23 +1,22 @@
-{ config, pkgs, osConfig, ... }:
-
-let
+{
+  config,
+  pkgs,
+  osConfig,
+  ...
+}: let
   cfg = config.home.global-persistence;
   sysCfg = osConfig.environment.global-persistence;
-in
-{
+in {
   programs = {
     fish = {
       enable = true;
       shellAliases = {
         deploy = "deploy --skip-checks";
-        rebuild =
-          "nixos-rebuild --use-remote-sudo -L --flake $HOME/source/flakes";
+        rebuild = "nixos-rebuild --use-remote-sudo -L --flake $HOME/source/flakes";
         nu = "rebuild switch --upgrade";
         hu = "home-manager switch";
-        ngc =
-          "sudo nix-env --profile /nix/var/nix/profiles/system --delete-generations +2;nix-env --delete-generations +2;nix-collect-garbage";
-        catage =
-          "nix-shell -p ssh-to-age --run 'cat /etc/ssh/ssh_host_ed25519_key.pub | ssh-to-age'";
+        ngc = "sudo nix-env --profile /nix/var/nix/profiles/system --delete-generations +2;nix-env --delete-generations +2;nix-collect-garbage";
+        catage = "nix-shell -p ssh-to-age --run 'cat /etc/ssh/ssh_host_ed25519_key.pub | ssh-to-age'";
         sops-update = "find . -name '*' -exec sops updatekeys {} \\;";
         # ll = "ls -l";
         # ls = "exa --icons";
@@ -25,10 +24,8 @@ in
         top = "btm";
         # BAT
         cat = "bat --style=plain";
-        fzf =
-          "fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'";
-        batdiff =
-          "git diff --name-only --relative --diff-filter=d | xargs bat --diff";
+        fzf = "fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'";
+        batdiff = "git diff --name-only --relative --diff-filter=d | xargs bat --diff";
 
         # kubectl = "sudo k3s kubectl";
         scp = "time scp -Cpr -o Compression=yes";
@@ -83,8 +80,7 @@ in
     };
   };
   programs.command-not-found.enable = true;
-  programs.nix-index =
-  {
+  programs.nix-index = {
     enableFishIntegration = true;
   };
   home.global-persistence.directories = [

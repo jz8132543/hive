@@ -1,14 +1,12 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   nixpkgs.config.allowUnfree = true;
   nix = {
     settings = {
-      nix-path = [ "nixpkgs=${pkgs.path}" ];
-      allowed-users = [ "@users" ];
-      trusted-users = [ "root" "@wheel" ];
+      nix-path = ["nixpkgs=${pkgs.path}"];
+      allowed-users = ["@users"];
+      trusted-users = ["root" "@wheel"];
       auto-optimise-store = true;
-      system-features = [ ];
+      system-features = [];
       keep-outputs = true;
       keep-derivations = true;
       fallback = true;

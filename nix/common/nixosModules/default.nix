@@ -1,10 +1,7 @@
-{ ... }:
-
-let
+{...}: let
   aliveInterval = "30";
   aliveCountMax = "60";
-in
-{
+in {
   services.openssh = {
     enable = true;
     forwardX11 = true;
@@ -22,7 +19,7 @@ in
     '';
   };
 
-  networking.firewall.allowedTCPPorts = [ 22 ];
+  networking.firewall.allowedTCPPorts = [22];
 
   environment.persistence = {
     files = [

@@ -1,6 +1,10 @@
-{ config, lib, pkgs, ...  }:
-
-lib.mkIf config.environment.graphical.enable{
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+lib.mkIf config.environment.graphical.enable {
   services = {
     v2ray = {
       enable = true;
@@ -9,9 +13,7 @@ lib.mkIf config.environment.graphical.enable{
   };
   environment.global-persistence = {
     directories = [
-     "/etc/xray"
+      "/etc/xray"
     ];
   };
-
-
 }

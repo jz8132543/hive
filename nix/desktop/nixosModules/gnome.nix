@@ -1,7 +1,11 @@
-{ config, pkgs, lib, ... }:
-
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 lib.mkIf
-  config.services.xserver.desktopManager.gnome.enable
+config.services.xserver.desktopManager.gnome.enable
 {
   services.xserver = {
     enable = true;

@@ -1,10 +1,13 @@
-{ config, pkgs, lib, ... }:
-let
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
   device = "/dev/disk/by-partlabel/NIXOS";
   fsType = "btrfs";
-  options = [ "noatime" "compress-force=zstd" "space_cache=v2" ];
-in
-{
+  options = ["noatime" "compress-force=zstd" "space_cache=v2"];
+in {
   fileSystems = {
     # "/" = {
     #   fsType = "tmpfs";
@@ -18,28 +21,28 @@ in
 
     "/" = {
       inherit device fsType;
-      options = [ "subvol=@ROOT" ] ++ options;
+      options = ["subvol=@ROOT"] ++ options;
     };
 
     "/nix" = {
       inherit device fsType;
-      options = [ "subvol=@nix" ] ++ options;
+      options = ["subvol=@nix"] ++ options;
     };
 
     "/boot" = {
       inherit device fsType;
-      options = [ "subvol=@boot" ] ++ options;
+      options = ["subvol=@boot"] ++ options;
     };
 
     "/persist" = {
       inherit device fsType;
-      options = [ "subvol=@persist" ] ++ options;
+      options = ["subvol=@persist"] ++ options;
       neededForBoot = true;
     };
 
     "/swap" = {
       inherit device fsType;
-      options = [ "subvol=@swap" ] ++ options;
+      options = ["subvol=@swap"] ++ options;
     };
   };
 
@@ -87,7 +90,7 @@ in
       };
       timeout = 1;
     };
-    supportedFilesystems = [ "vfat" "btrfs" "ntfs" ];
+    supportedFilesystems = ["vfat" "btrfs" "ntfs"];
     kernelPackages = pkgs.linuxPackages_latest;
   };
 

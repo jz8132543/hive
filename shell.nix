@@ -1,7 +1,7 @@
-with import <nixpkgs>{};
-pkgs.mkShell {
-  buildInputs = [
-    nil
-    nixpkgs-fmt
-  ];
-}
+with import <nixpkgs> {};
+  pkgs.mkShell {
+    buildInputs = [
+      nil
+      nixpkgs-fmt
+    ];
+  }

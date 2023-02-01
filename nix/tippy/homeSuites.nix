@@ -1,8 +1,7 @@
-{ inputs
-, cell
-,
-}:
 {
+  inputs,
+  cell,
+}: {
   tippy = [
     cell.userProfiles.root
     cell.userProfiles.tippy

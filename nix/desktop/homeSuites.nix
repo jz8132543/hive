@@ -1,8 +1,7 @@
-{ inputs
-, cell
-,
-}:
 {
+  inputs,
+  cell,
+}: {
   desktop = [
     cell.homeModules.apps
     cell.homeModules.chromium

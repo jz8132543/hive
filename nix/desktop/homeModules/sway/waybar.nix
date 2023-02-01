@@ -1,8 +1,6 @@
-{ pkgs }:
-let
+{pkgs}: let
   mkSpan = abbr: content: "<span color='#8aadf4'>${abbr}</span> ${content}";
-in
-{
+in {
   margin = "3px 3px 3px";
   height = 40;
   layer = "top";
@@ -43,7 +41,15 @@ in
   "sway/workspaces" = {
     all-outputs = true;
     format = "{name} {icon}";
-    format-icons = { "1" = ""; "2" = ""; "3" = ""; "4" = ""; default = ""; focused = ""; urgent = ""; };
+    format-icons = {
+      "1" = "";
+      "2" = "";
+      "3" = "";
+      "4" = "";
+      default = "";
+      focused = "";
+      urgent = "";
+    };
   };
   idle_inhibitor = {
     format = mkSpan "IDLE" "{icon}";
@@ -58,7 +64,7 @@ in
     format-bluetooth-muted = " {icon}  {format_source}";
     format-icons = {
       car = "";
-      default = [ "" "" "" ];
+      default = ["" "" ""];
       hands-free = "";
       headphone = "";
       headset = "";
@@ -83,7 +89,7 @@ in
   clock = {
     format = "{:${mkSpan "%b %d" "%H:%M"}}";
     tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
-    format-alt = "{:${mkSpan "%A %B""%d %Y"}}";
+    format-alt = "{:${mkSpan "%A %B" "%d %Y"}}";
   };
   memory = {
     format = mkSpan "MEM" "{percentage}%";

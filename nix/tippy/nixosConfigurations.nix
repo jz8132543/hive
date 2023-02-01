@@ -1,7 +1,6 @@
-{ inputs
-, cell
-,
-}:
 {
-  surface = import ./nixosConfigurations/surface { inherit inputs cell; };
+  inputs,
+  cell,
+}: {
+  surface = import ./nixosConfigurations/surface {inherit inputs cell;};
 }

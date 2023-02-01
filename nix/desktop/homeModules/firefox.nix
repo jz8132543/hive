@@ -1,5 +1,9 @@
-{ nixosConfig, lib, pkgs, ...  }:
-
+{
+  nixosConfig,
+  lib,
+  pkgs,
+  ...
+}:
 lib.mkIf nixosConfig.environment.graphical.enable {
   programs.firefox = {
     enable = true;
@@ -49,5 +53,4 @@ lib.mkIf nixosConfig.environment.graphical.enable {
       ".mozilla"
     ];
   };
-
 }

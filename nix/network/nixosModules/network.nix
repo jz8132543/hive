@@ -1,9 +1,7 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   networking = {
     domain = "dora.im";
-    search = [ "dora.im" ];
+    search = ["dora.im"];
     firewall.enable = false;
     nameservers = [
       "1.1.1.1"
@@ -16,7 +14,7 @@
     '';
   };
   boot = {
-    kernelModules = [ "tcp_bbr" ];
+    kernelModules = ["tcp_bbr"];
     kernel.sysctl."net.ipv4.tcp_congestion_control" = "bbr";
   };
   programs = {

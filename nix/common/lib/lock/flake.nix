@@ -72,5 +72,5 @@
     julia2nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, ... }: { };
+  outputs = {self, ...}: {};
 }

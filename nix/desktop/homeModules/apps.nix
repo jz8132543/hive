@@ -1,7 +1,11 @@
-{ nixosConfig, lib, pkgs, ... }:
-
+{
+  nixosConfig,
+  lib,
+  pkgs,
+  ...
+}:
 lib.mkIf nixosConfig.environment.graphical.enable {
-  home.packages = with pkgs;  [
+  home.packages = with pkgs; [
     go
     mpv
 
@@ -18,5 +22,4 @@ lib.mkIf nixosConfig.environment.graphical.enable {
       ".config/BaiduPCS-Go"
     ];
   };
-
 }

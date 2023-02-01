@@ -1,11 +1,8 @@
-{ config, ... }:
-
-let
+{config, ...}: let
   name = "root";
   homeDirectory = "/home/${name}";
   aws_link = config.sops.secrets.s3_credentials.path;
-in
-{
+in {
   home.file.".aws/credentials".source =
     config.lib.file.mkOutOfStoreSymlink aws_link;
   users.users.${name} = {

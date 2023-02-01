@@ -1,6 +1,10 @@
-{ config, pkgs, lib, ... }:
-
-lib.mkIf config.environment.graphical.enable{
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+lib.mkIf config.environment.graphical.enable {
   fonts.fonts = with pkgs; [
     noto-fonts
     noto-fonts-cjk-sans
@@ -14,11 +18,11 @@ lib.mkIf config.environment.graphical.enable{
     source-code-pro
 
     jetbrains-mono
-    (nerdfonts.override { fonts = [ "JetBrainsMono" "Noto" ]; })
+    (nerdfonts.override {fonts = ["JetBrainsMono" "Noto"];})
   ];
 
   fonts.fontconfig.defaultFonts = {
-    sansSerif = lib.mkBefore [ 
+    sansSerif = lib.mkBefore [
       "Source Sans 3"
       "Source Han Sans SC"
       "Source Han Sans TC"
@@ -36,7 +40,7 @@ lib.mkIf config.environment.graphical.enable{
       "Noto Serif"
       "Noto Serif CJK SC"
     ];
-    monospace = lib.mkAfter [ "JetBrains Mono" ];
-    emoji = lib.mkBefore [ "Noto Color Emoji" ];
+    monospace = lib.mkAfter ["JetBrains Mono"];
+    emoji = lib.mkBefore ["Noto Color Emoji"];
   };
 }

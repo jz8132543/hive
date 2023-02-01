@@ -1,8 +1,9 @@
-{ inputs
-, cell
+{
+  inputs,
+  cell,
 }: rec {
   default = {
-    imports = [ inputs.impermanence.nixosModules.impermanence ];
+    imports = [inputs.impermanence.nixosModules.impermanence];
     environment.global-persistence = {
       files = [
         "/etc/machine-id"

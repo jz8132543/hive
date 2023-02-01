@@ -50,91 +50,91 @@
   };
 
   # individual inputs
-  inputs = { };
+  inputs = {};
 
-  outputs =
-    { self
-    , std
-    , nixpkgs
-    , ...
-    } @ inputs:
+  outputs = {
+    self,
+    std,
+    nixpkgs,
+    ...
+  } @ inputs:
     std.growOn
-      {
-        inherit inputs;
-        systems = [
-          "aarch64-darwin"
-          "aarch64-linux"
-          "x86_64-darwin"
-          "x86_64-linux"
-        ];
+    {
+      inherit inputs;
+      systems = [
+        "aarch64-darwin"
+        "aarch64-linux"
+        "x86_64-darwin"
+        "x86_64-linux"
+      ];
 
-        cellsFrom = ./nix;
+      cellsFrom = ./nix;
 
-        cellBlocks = with std.blockTypes; [
-          # modules implement
-          (functions "nixosModules")
-          (functions "darwinModules")
-          (functions "homeModules")
-          (functions "devshellModules")
+      cellBlocks = with std.blockTypes; [
+        # modules implement
+        (functions "nixosModules")
+        (functions "darwinModules")
+        (functions "homeModules")
+        (functions "devshellModules")
 
-          # profiles activate
-          (functions "nixosProfiles")
-          (functions "darwinProfiles")
-          (functions "homeProfiles")
-          (functions "devshellProfiles")
-          (functions "userProfiles")
-          (functions "secretProfiles")
-          (functions "arionProfiles")
-          (functions "microvmProfiles")
+        # profiles activate
+        (functions "nixosProfiles")
+        (functions "darwinProfiles")
+        (functions "homeProfiles")
+        (functions "devshellProfiles")
+        (functions "userProfiles")
+        (functions "secretProfiles")
+        (functions "arionProfiles")
+        (functions "microvmProfiles")
 
-          # suites aggregate profiles
-          (functions "nixosSuites")
-          (functions "darwinSuites")
-          (functions "homeSuites")
+        # suites aggregate profiles
+        (functions "nixosSuites")
+        (functions "darwinSuites")
+        (functions "homeSuites")
 
-          # configurations can be deployed
-          (data "colmenaConfigurations")
-          (data "homeConfigurations")
-          (data "nixosConfigurations")
-          (data "darwinConfigurations")
-          (data "diskoConfigurations")
-          (arion "arionConfigurations")
-          (microvms "microvms")
+        # configurations can be deployed
+        (data "colmenaConfigurations")
+        (data "homeConfigurations")
+        (data "nixosConfigurations")
+        (data "darwinConfigurations")
+        (data "diskoConfigurations")
+        (arion "arionConfigurations")
+        (microvms "microvms")
 
-          # devshells can be entered
-          (devshells "devshells")
+        # devshells can be entered
+        (devshells "devshells")
 
-          # jobs can be run
-          (runnables "entrypoints")
+        # jobs can be run
+        (runnables "entrypoints")
 
-          # lib holds shared knowledge made code
-          (functions "lib")
-          (functions "config")
-          (installables "packages" { ci.build = true; })
-          (functions "overlays")
+        # lib holds shared knowledge made code
+        (functions "lib")
+        (functions "config")
+        (installables "packages" {ci.build = true;})
+        (functions "overlays")
 
-          # nixago part
-          (nixago "nixago")
+        # nixago part
+        (nixago "nixago")
 
-          # containers collection
-          (containers "containers" { ci.publish = true; })
-        ];
-      }
-      {
-        devShells = inputs.std.harvest inputs.self [ "automation" "devshells" ];
-        lib = (inputs.std.harvest inputs.self [ "_QUEEN" "lib" ]).x86_64-linux;
-        overlays = (inputs.std.harvest inputs.self [ "tippy" "overlays" ]).x86_64-linux;
-        packages = inputs.std.harvest inputs.self [ [ "tippy" "packages" ] ];
-      }
-      # soil - the first (and only) layer implements adapters for tooling
-      {
-        # tools
-        colmenaHive = self.lib.colmenaHive "colmenaConfigurations" self;
-        nixosConfigurations = self.lib.nixosConfigurations "nixosConfigurations" self;
-        homeConfigurations = self.lib.homeConfigurations "homeConfigurations" self;
-        darwinConfigurations = self.lib.darwinConfigurations "darwinConfigurations" self;
-        diskoConfigurations = self.lib.diskoConfigurations "diskoConfigurations" self;
-      };
+        # containers collection
+        (containers "containers" {ci.publish = true;})
+      ];
+    }
+    {
+      devShells = inputs.std.harvest inputs.self ["automation" "devshells"];
+      lib = (inputs.std.harvest inputs.self ["_QUEEN" "lib"]).x86_64-linux;
+      overlays = (inputs.std.harvest inputs.self ["tippy" "overlays"]).x86_64-linux;
+      packages = inputs.std.harvest inputs.self [["tippy" "packages"]];
+    }
+    # soil - the first (and only) layer implements adapters for tooling
+    {
+      # tools
+      colmenaHive = self.lib.colmenaHive "colmenaConfigurations" self;
+      nixosConfigurations = self.lib.nixosConfigurations "nixosConfigurations" self;
+      homeConfigurations = self.lib.homeConfigurations "homeConfigurations" self;
+      darwinConfigurations = self.lib.darwinConfigurations "darwinConfigurations" self;
+      diskoConfigurations = self.lib.diskoConfigurations "diskoConfigurations" self;
+    };
   # --- Flake Local Nix Configuration ----------------------------
   nixConfig = {
     extra-substituters = [

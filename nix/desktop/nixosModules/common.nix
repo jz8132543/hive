@@ -1,13 +1,17 @@
-{ config, lib, pkgs, ...  }:
-
-lib.mkIf config.environment.graphical.enable{
-  boot.supportedFilesystems = [ "ntfs" ];
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+lib.mkIf config.environment.graphical.enable {
+  boot.supportedFilesystems = ["ntfs"];
   hardware = {
     video.hidpi.enable = true;
     bluetooth.enable = true;
     opengl = {
       enable = true;
-      extraPackages = with pkgs; [ intel-media-driver ];
+      extraPackages = with pkgs; [intel-media-driver];
     };
   };
   console.font = "latarcyrheb-sun32";
@@ -34,7 +38,7 @@ lib.mkIf config.environment.graphical.enable{
     files = [
     ];
     directories = [
-     "/etc/NetworkManager"
+      "/etc/NetworkManager"
     ];
     user.directories = [
       ".local/state"

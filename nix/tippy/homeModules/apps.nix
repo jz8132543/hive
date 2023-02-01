@@ -1,12 +1,14 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   programs.home-manager = {
     enable = true;
   };
   # Allow unfree
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.allowUnfreePredicate = (pkg: true);
+  nixpkgs.config.allowUnfreePredicate = pkg: true;
   home.packages = with pkgs; [
     cachix
     thefuck

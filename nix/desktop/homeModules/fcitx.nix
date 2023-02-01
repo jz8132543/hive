@@ -1,29 +1,25 @@
-{ pkgs, ... }:
-
-let
-  makeDict = name: dicts:
-    let
-      body = builtins.toJSON {
-        inherit name;
-        version = "1.0";
-        sort = "by_weight";
-        use_preset_vocabulary = false;
-        import_tables = dicts;
-      };
-    in
-    ''
-      # Rime dictionary
-      # encoding: utf-8
-      ---
-      ${body}
-      ...
-    '';
+{pkgs, ...}: let
+  makeDict = name: dicts: let
+    body = builtins.toJSON {
+      inherit name;
+      version = "1.0";
+      sort = "by_weight";
+      use_preset_vocabulary = false;
+      import_tables = dicts;
+    };
+  in ''
+    # Rime dictionary
+    # encoding: utf-8
+    ---
+    ${body}
+    ...
+  '';
 in {
   xdg.dataFile = {
     "fcitx5/themes".source = "${pkgs.nur.repos.xddxdd.fcitx5-breeze}/share/fcitx5/themes";
     "fcitx5/rime/default.custom.yaml".text = builtins.toJSON {
       patch = {
-        schema_list = [ { schema = "aurora_pinyin"; } ];
+        schema_list = [{schema = "aurora_pinyin";}];
         "menu/page_size" = 9;
         "ascii_composer/good_old_caps_lock" = true;
         "ascii_composer/switch_key" = {
@@ -33,8 +29,8 @@ in {
           "Control_L" = "noop";
           "Control_R" = "noop";
         };
-        "switcher/hotkeys" = [ "F4" ];
-        "switcher/save_options" = [ "full_shape" "ascii_punct" "simplification" "extended_charset" ];
+        "switcher/hotkeys" = ["F4"];
+        "switcher/save_options" = ["full_shape" "ascii_punct" "simplification" "extended_charset"];
         "switcher/fold_options" = false;
         "switcher/abbreviate_options" = false;
       };
@@ -63,7 +59,8 @@ in {
       };
     };
 
-    "fcitx5/rime/lantian_aurora_pinyin.dict.yaml".text = makeDict
+    "fcitx5/rime/lantian_aurora_pinyin.dict.yaml".text =
+      makeDict
       "lantian_aurora_pinyin"
       [
         "aurora_pinyin"
@@ -89,7 +86,8 @@ in {
       };
     };
 
-    "fcitx5/rime/lantian_luna_pinyin_simp.dict.yaml".text = makeDict
+    "fcitx5/rime/lantian_luna_pinyin_simp.dict.yaml".text =
+      makeDict
       "lantian_luna_pinyin_simp"
       [
         "pinyin_simp"

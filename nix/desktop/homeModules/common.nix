@@ -1,5 +1,10 @@
-{ nixosConfig, config, lib, pkgs, ...  }:
-
+{
+  nixosConfig,
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 lib.mkIf nixosConfig.environment.graphical.enable {
   gtk = {
     enable = true;
@@ -33,7 +38,7 @@ lib.mkIf nixosConfig.environment.graphical.enable {
   };
 
   home.packages = with pkgs; [
-    dconf 
+    dconf
     swaylock
     swayidle
     swaynotificationcenter
@@ -49,5 +54,4 @@ lib.mkIf nixosConfig.environment.graphical.enable {
       ".local/share/TelegramDesktop"
     ];
   };
-
 }

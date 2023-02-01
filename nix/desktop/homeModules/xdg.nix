@@ -1,5 +1,10 @@
-{ nixosConfig, config, lib, pkgs, ...  }:
-
+{
+  nixosConfig,
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 lib.mkIf nixosConfig.environment.graphical.enable {
   xdg = {
     enable = true;
