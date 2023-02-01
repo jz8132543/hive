@@ -4,6 +4,9 @@
 }:
 {
   tippy = [
+    cell.userProfiles.root
+    cell.userProfiles.tippy
+
     cell.homeModules.apps
     cell.homeModules.direnv
     cell.homeModules.fish
