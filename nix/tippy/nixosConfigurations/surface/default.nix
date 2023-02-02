@@ -8,7 +8,6 @@
   bee.pkgs = import inputs.nixos {
     inherit (inputs.nixpkgs) system;
     config.allowUnfree = true;
-    overlays = cell.overlays.desktop;
   };
   imports =
     [
