@@ -2,7 +2,16 @@
   inputs,
   cell,
   ...
-}: rec {
+}: let
+  init = {modulesPath, ...}: {
+    ### root password is empty by default ###
+    imports = [
+      ./hardware-configuration.nix
+      (modulesPath + "/profiles/qemu-guest.nix")
+    ];
+    system.stateVersion = "22.11";
+  };
+in rec {
   bee.system = "x86_64-linux";
   bee.home = inputs.home;
   bee.pkgs = import inputs.nixos {
@@ -11,8 +20,14 @@
   };
   imports =
     [
-      ./hardware-configuration.nix
+      bee.home.nixosModules.home-manager
+      init
     ]
-    ++ cell.nixosProfiles.default
-    ++ cell.nixosProfiles.desktop.default;
+    ++ [
+      {
+        home-manager.useGlobalPkgs = true;
+        home-manager.useUserPackages = true;
+      }
+    ]
+    ++ cell.nixosSuites.desktop;
 }
