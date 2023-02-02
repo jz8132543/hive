@@ -1,6 +1,6 @@
-{ inputs
-, cell
-,
+{
+  inputs,
+  cell,
 }: {
   default.imports = [
     inputs.cells.common.nixosSuites.default
