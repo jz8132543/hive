@@ -1,12 +1,12 @@
-{
-  inputs,
-  cell,
+{ inputs
+, cell
+,
 }: {
-  default = [
+  default.imports = [
     inputs.cells.common.nixosSuites.default
   ];
   desktop = {
-    default = [
+    default.imports = [
       inputs.cells.desktop.nixosSuites.desktop
     ];
   };
